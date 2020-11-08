@@ -9,19 +9,23 @@
 		<transition name="fade">
 			<global-menu class="header-menu" mode="horizontal" v-if="!isMenuInAside" />
 		</transition>
-		<div class="header-right">@todo</div>
+		<div class="header-right">
+			<user-center />
+		</div>
 	</div>
 </template>
 <script>
 import { mapState } from 'vuex';
 import GlobalLogo from '../global-logo';
 import GlobalMenu from '../global-menu/index.vue';
+import UserCenter from './components/user-center/index.vue';
 
 export default {
 	name: 'GlobalAside',
 	components: {
 		GlobalLogo,
 		GlobalMenu,
+		UserCenter,
 	},
 	computed: {
 		...mapState({

@@ -35,21 +35,21 @@ export const routes = [
 	},
 	{
 		path: '/about',
-		name: '组件',
+		name: '嵌套路由',
 		component: BaseLayout,
 		redirect: '/components/index',
 		meta: { title: 'Icons', icon: 'el-icon-s-home', cache: true, name: 'Test' },
 		children: [
 			{
 				path: '/about/auth',
-				name: 'Icons1',
-				meta: { title: 'Icons', icon: 'el-icon-s-home', pin: true, cache: true, name: 'Test' },
+				name: '嵌套路由1',
+				meta: { title: 'Icons', icon: 'el-icon-s-check', pin: true, cache: true, name: 'Test' },
 				component: () => import('@/views/Home.vue'),
 			},
 			{
 				path: '/about/auth2',
-				name: 'Icons1',
-				meta: { title: 'Icons', icon: 'icon', cache: true },
+				name: '嵌套路由2',
+				meta: { title: 'Icons', icon: 'el-icon-setting', cache: true },
 				component: () => import('@/views/Home.vue'),
 			},
 		],
