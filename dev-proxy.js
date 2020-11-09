@@ -1,17 +1,16 @@
 module.exports = {
-	'/api': {
+	'/k20/vas-web-api/api/Auth': {
 		target: 'http://192.168.7.8:8081',
 		changeOrigin: true,
 		pathRewrite: {
-			'^/api': '/api',
+			'^/k20/vas-web-api/api/Auth': '/api/Auth',
 		},
 	},
-	'/pms/ws': {
-		target: 'http://192.168.7.8:8081',
+	'/k20/vas-web-api/api': {
+		target: 'http://192.168.8.40:8099',
 		changeOrigin: true,
-		ws: true,
 		pathRewrite: {
-			'^/pms/ws': '/pms/ws',
+			'^/k20/vas-web-api/api': '/api',
 		},
 	},
 };

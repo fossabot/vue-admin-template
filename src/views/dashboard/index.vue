@@ -26,17 +26,15 @@
 					<span>关于</span>
 				</div>
 				<p>一个简单的 Vue 后台系统开发模板。</p>
-				<img
-					style="width: 100%"
-					src="https://github-readme-stats.vercel.app/api?username=uninge"
-					alt="about"
-				/>
 			</el-card>
 		</el-col>
+		<el-button type="primary" @click="onLogin">登陆</el-button>
 	</el-row>
 </template>
 
 <script>
+import { onLogin } from '@/apis';
+
 export default {
 	name: 'Dashboard',
 	props: {},
@@ -60,22 +58,23 @@ export default {
 				},
 				{
 					size: 'large',
-					icon: 'el-icon-mouse',
-					timestamp: '2020-10-31',
-					content: '正好周六，那索性就先准备个简单的项目模板吧。',
-				},
-				{
-					size: 'large',
 					icon: 'el-icon-more',
 					timestamp: '2020-10-30',
-					content: '领导说: 其他部门都用Vue，综合考虑我们以后的项目也用Vue。',
+					content: '周六，准备个简单的项目模板吧。',
 				},
 			],
 		};
 	},
 	created() {},
 	mounted() {},
-	methods: {},
+	methods: {
+		onLogin() {
+			onLogin({
+				UserName: 'Admin',
+				Password: 1,
+			}).then(() => this.$message.success('登陆成功'));
+		},
+	},
 };
 </script>
 
