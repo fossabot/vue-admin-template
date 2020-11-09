@@ -34,6 +34,7 @@
 
 <script>
 import { onLogin } from '@/apis';
+import WS from '../../utils/websocket';
 
 export default {
 	name: 'Dashboard',
@@ -66,7 +67,10 @@ export default {
 		};
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		const a = new WS('ws://121.40.165.18:8800');
+		console.log(a);
+	},
 	methods: {
 		onLogin() {
 			onLogin({
