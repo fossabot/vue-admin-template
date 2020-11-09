@@ -1,11 +1,10 @@
 import axios from 'axios';
 import cfg from '@/config';
-import baseUrls from '@/config/base-urls';
-import { isObject, objToStr, filterUndefinedNull } from '@/utils/functions';
+import { isObject, objToStr, filterUndefinedNull } from './functions';
 import { statusTextMap } from './status-code';
 import { ApiResponseException } from './errors';
 
-const { environment } = cfg;
+const { environment, baseUrls } = cfg;
 
 class Request {
 	constructor(env = 'production', extraConfig) {

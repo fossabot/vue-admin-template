@@ -1,5 +1,6 @@
 export const noop = (args) => args;
 export const getType = (value) => Object.prototype.toString.call(value).slice(8, -1);
+export const isString = (value) => getType(value) === 'String';
 export const isObject = (value) => getType(value) === 'Object';
 export const isEmpty = function (val) {
 	if (val === null || val === undefined) return true;
