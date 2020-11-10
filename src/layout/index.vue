@@ -103,7 +103,7 @@ export default {
 }
 
 .app-battlefield {
-	width: calc(100% - @app-aside-width);
+	width: 100%;
 	min-width: 568px;
 	padding: 10px;
 	overflow: hidden;
