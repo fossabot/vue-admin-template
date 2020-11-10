@@ -77,9 +77,9 @@ export default {
 			left: @app-aside-width;
 		}
 		&.collapse {
-			margin-left: @app-aside-width-collapse;
+			margin-left: @app-aside-collapse-width;
 			.content {
-				left: @app-aside-width-collapse;
+				left: @app-aside-collapse-width;
 			}
 		}
 	}
@@ -88,7 +88,7 @@ export default {
 			height: 60px;
 			transition: height 0.3s linear;
 			&.has-tabs {
-				height: 116px;
+				height: @app-header-height + @app-tabs-bar-height;
 			}
 			.content {
 				position: fixed;
@@ -103,7 +103,6 @@ export default {
 }
 
 .app-battlefield {
-	box-sizing: border-box;
 	width: calc(100% - @app-aside-width);
 	min-width: 568px;
 	padding: 10px;

@@ -68,9 +68,18 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.global-menu.el-menu.el-menu--horizontal {
-	box-sizing: border-box;
-	border-bottom-width: 0;
+<style lang="less">
+.global-menu.el-menu {
+	&.el-menu--horizontal {
+		border-bottom-width: 0;
+		& > .el-menu-item {
+			height: @app-header-height;
+			line-height: @app-header-height;
+		}
+		& > .el-submenu .el-submenu__title {
+			height: @app-header-height;
+			line-height: @app-header-height;
+		}
+	}
 }
 </style>

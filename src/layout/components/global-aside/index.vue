@@ -35,15 +35,14 @@ export default {
 	top: 0;
 	left: 0;
 	z-index: @small-z-index;
-	box-sizing: border-box;
 	width: @app-aside-width;
 	height: 100%;
 	user-select: none;
-	background: @app-aside-bg;
-	border-right: solid 1px @app-aside-bg;
+	background: @light-aside-bg;
+	border-right: solid 1px @light-aside-bg;
 	transition: all 0.3s linear;
 	&.collapse {
-		width: @app-aside-width-collapse;
+		width: @app-aside-collapse-width;
 	}
 
 	/deep/ .el-menu {

@@ -5,7 +5,7 @@ export default {
 		isFixedHeader: true,
 		isShowTabsView: true,
 		isLogoShow: true,
-		isMenuInAside: true,
+		isMenuInAside: false,
 		isMenuCollapse: false,
 	},
 	mutations: {

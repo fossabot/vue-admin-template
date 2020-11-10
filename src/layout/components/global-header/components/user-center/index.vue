@@ -23,7 +23,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 60px;
+	height: @app-header-height;
 	padding: 0 10px;
 	cursor: pointer;
 	transition: all 0.3s;

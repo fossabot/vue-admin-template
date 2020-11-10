@@ -49,7 +49,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 60px;
+	height: @app-header-height;
 	background: #fff;
 	border-bottom: 1px solid #ebeef5;
 	.header-aside {

@@ -309,17 +309,20 @@ export default {
 	background: #fff;
 
 	.tabs-bar {
-		padding: 10px;
+		display: flex;
+		align-items: center;
+		height: @app-tabs-bar-height;
+		padding: 0 10px;
 		margin: 0;
 		white-space: nowrap;
 		user-select: none;
 		.tabs-item {
 			position: relative;
 			display: inline-block;
-			height: 34px;
-			padding: 0 20px;
+			height: 30px;
+			padding: 0 10px;
 			margin-right: 6px;
-			line-height: 34px;
+			line-height: 30px;
 			list-style: none;
 			cursor: default;
 			border: 1px solid #ededed;

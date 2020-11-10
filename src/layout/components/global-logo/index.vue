@@ -26,11 +26,10 @@ export default {
 
 <style lang="less" scoped>
 .global-logo {
-	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 60px;
+	height: @app-header-height;
 	color: #f6ca9d;
 	cursor: pointer;
 
