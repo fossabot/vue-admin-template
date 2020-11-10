@@ -4,7 +4,7 @@ import getAppInfo from '@/utils/app-info';
 import App from './App.vue';
 import store from './store';
 import router from './router';
-import './icons';
+import './assets/icons';
 import './permission';
 import './registerServiceWorker';
 import './styles/global.less';
