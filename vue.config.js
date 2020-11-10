@@ -30,6 +30,11 @@ module.exports = {
 		},
 	},
 
+	configureWebpack: config => {
+		config.mode = process.env.NODE_ENV;
+		config.devtool = 'cheap-module-source-map';
+	},
+
 	chainWebpack(config) {
 		config.plugin('WebpackBar')
 			.use(new WebpackBar({

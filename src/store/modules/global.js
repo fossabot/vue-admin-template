@@ -35,7 +35,14 @@ export default {
 						break;
 					case 'update':
 						if (index > -1) {
-							list.splice(index, 1, view);
+							list = list.reduce((prev, curr, idx) => {
+								if (index === idx) {
+									prev.push(view);
+								} else {
+									prev.push(curr);
+								}
+								return prev;
+							}, []);
 						}
 						break;
 					case 'refresh':
@@ -60,7 +67,14 @@ export default {
 						break;
 					default:
 						if (index > -1) {
-							list.splice(index, 1, view);
+							list = list.reduce((prev, curr, idx) => {
+								if (index === idx) {
+									prev.push(view);
+								} else {
+									prev.push(curr);
+								}
+								return prev;
+							}, []);
 						} else {
 							list = [...list, view];
 						}

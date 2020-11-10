@@ -5,7 +5,7 @@ export default {
 		isFixedHeader: true,
 		isShowTabsView: true,
 		isLogoShow: true,
-		isMenuInAside: false,
+		isMenuInAside: true,
 		isMenuCollapse: false,
 	},
 	mutations: {
@@ -21,7 +21,7 @@ export default {
 		SET_MENU_POSITION(state) {
 			state.isMenuInAside = !state.isMenuInAside;
 		},
-		SET_MENU_CCOLLPASE_STATUS(state) {
+		SET_MENU_COLLAPSE_STATUS(state) {
 			state.isMenuCollapse = !state.isMenuCollapse;
 		},
 	},
@@ -39,7 +39,7 @@ export default {
 			commit('SET_MENU_POSITION');
 		},
 		onChangeMenuCollapseStatus({ commit }) {
-			commit('SET_MENU_CCOLLPASE_STATUS');
+			commit('SET_MENU_COLLAPSE_STATUS');
 		},
 	},
 };

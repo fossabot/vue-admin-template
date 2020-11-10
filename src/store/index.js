@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { createLogger } from 'vuex';
+import config from '@/config';
 
 Vue.use(Vuex);
 
@@ -13,5 +14,7 @@ const modules = webpackContext.keys().reduce((res, path) => {
 }, {});
 
 export default new Vuex.Store({
+	strict: config.isDevelopment,
+	plugins: config.isDevelopment ? [createLogger()] : [],
 	modules,
 });
