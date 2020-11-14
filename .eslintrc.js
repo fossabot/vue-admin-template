@@ -13,6 +13,7 @@ module.exports = {
 		parser: 'babel-eslint',
 	},
 	rules: {
+		'prettier/prettier': 'error',
 		'no-console': process.env.NODE_ENV === 'production' ? WARN : OFF,
 		'no-debugger': process.env.NODE_ENV === 'production' ? WARN : OFF,
 		quotes: ERROR,
@@ -24,6 +25,7 @@ module.exports = {
 		'arrow-body-style': OFF,
 		'prefer-destructuring': OFF,
 		'object-curly-spacing': [ERROR, 'always'],
+		'key-spacing': [1, { "beforeColon": false, "afterColon": true }],
 
 		'no-var': ERROR,
 		'no-proto': ERROR,
