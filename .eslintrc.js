@@ -19,7 +19,7 @@ module.exports = {
 		quotes: ERROR,
 		indent: [ERROR, 'tab', { SwitchCase: 1 }],
 		radix: [ERROR, 'as-needed'],
-		'one-var': WARN,
+		'one-var': OFF,
 		'func-names': OFF,
 		'global-require': OFF,
 		'arrow-body-style': OFF,
