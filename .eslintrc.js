@@ -16,6 +16,7 @@ module.exports = {
 		'prettier/prettier': 'error',
 		'no-console': process.env.NODE_ENV === 'production' ? WARN : OFF,
 		'no-debugger': process.env.NODE_ENV === 'production' ? WARN : OFF,
+		semi: ERROR,
 		quotes: ERROR,
 		indent: [ERROR, 'tab', { SwitchCase: 1 }],
 		radix: [ERROR, 'as-needed'],
