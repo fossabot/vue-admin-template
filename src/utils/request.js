@@ -26,11 +26,13 @@ class Request {
 	_errorHandler(error) {
 		const config = error.config;
 		const response = error.response;
-		const message = error.message || statusTextMap.get(status) || '未知错误';
+		const message = (response.data || {}).message || statusTextMap.get(status) || error.message || '未知错误';
 
 		if (!config.background) {
 			// @todo 菊花图
 		}
+
+		// @todo message
 
 		if (response && response.status) {
 			const { status } = response;
@@ -43,16 +45,13 @@ class Request {
 				// @todo 权限不足
 			}
 
-			// @todo message
 			return Promise.reject(new ApiResponseException(status, message));
 		}
 
 		if (error.message.startsWith('timeout of ')) {
-			// @todo message
 			return Promise.reject(new ApiResponseException(408, message));
 		}
 
-		// @todo message
 		return Promise.reject(new ApiResponseException(500, message));
 	}
 
