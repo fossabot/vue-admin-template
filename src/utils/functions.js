@@ -96,3 +96,21 @@ export function deepCopy(obj, cache = []) {
 
 	return copy;
 }
+
+/**
+ * 从字符串中获取值
+ * @param name 名字
+ * @param {String} search? 可选
+ * @param {String} separator? 与第二个参数同在
+ * @returns {string|null}
+ */
+export function getQueryString(name, search, separator) {
+	search = search || window.location.href.split('?')[1] || '';
+	separator = separator || '&';
+	const reg = new RegExp(`(^|${separator})${name}=([^${separator}]*)(${separator}|$)`, 'i');
+	const result = reg.exec(search);
+	if (result != null) {
+		return decodeURIComponent(result[2]);
+	}
+	return null;
+}

@@ -1,28 +1,22 @@
 import axios from 'axios';
 import cfg from '@/config';
-import { isObject, objToStr, filterUndefinedNull } from './functions';
+import { isObject, objToStr, filterUndefinedNull, getQueryString } from './functions';
 import { statusTextMap } from './status-code';
 import { ApiResponseException } from './errors';
 
 const { environment, baseUrls } = cfg;
 
 class Request {
-	constructor(env = 'production', extraConfig) {
+	constructor(env = 'production', initConfig) {
 		this.env = env;
 		this.isProd = env === 'production';
-		const headers = { ...extraConfig?.headers };
-		this.customConfig = { background: !!extraConfig?.background };
-
-		delete extraConfig?.headers;
-		delete extraConfig?.background;
-
-		if (!headers.authorization) delete headers.authorization;
 
 		this.client = axios.create({
-			timeout: Number.MAX_SAFE_INTEGER, // 暂时永不超时
+			timeout: 0, // 暂时永不超时
+			withCredentials: true,
 			paramsSerializer: (params) => objToStr(params),
-			...extraConfig,
-			headers,
+			...initConfig,
+			background: !!initConfig?.background,
 		});
 
 		this._configRequestInterceptors();
@@ -43,12 +37,10 @@ class Request {
 
 			if (status === 401) {
 				// @todo 登陆
-				return Promise.reject(new ApiResponseException(status, message));
 			}
 
 			if (status === 403) {
 				// @todo 权限不足
-				return Promise.reject(new ApiResponseException(status, message));
 			}
 
 			// @todo message
@@ -119,9 +111,8 @@ class Request {
 
 		const relConfig = {
 			withCredentials: true,
-			headers: { ...headers },
-			...this.customConfig,
 			...config,
+			headers: { ...headers },
 			params: {
 				...filterUndefinedNull({
 					...(isObject(params) ? params : {}),
@@ -135,12 +126,64 @@ class Request {
 			.request(relConfig)
 			.then((response) => {
 				// console.log(`%c${JSON.stringify(config, null, 2)}`, 'color:#0085fa', '--->>>', response);
+				if (config.fullResponse) return response;
+
 				return response.data;
 			})
 			.catch((error) => {
 				// console.log(`%c${JSON.stringify(config, null, 2)}`, 'color:#0085fa', '--->>>', error);
 				return Promise.reject(error);
 			});
+	}
+
+	/**
+	 * 打开新链接下载文件
+	 * @param {Object} config
+	 * @param {String} config.url 接口url路径 eg. Home/DownloadEgFile
+	 * @param {Object} config?.params 将会以字符串形式拼接至url
+	 */
+	downLoadByOpenNewTab(config = {}) {
+		const path = config.url?.replace(/^\//, '') || '';
+		const apiHead = path.split('/')[0] || 'api';
+		let baseUrlConfig = baseUrls[apiHead];
+
+		if (!isObject(baseUrlConfig)) {
+			baseUrlConfig = baseUrls.api;
+		}
+
+		const baseUrl = baseUrlConfig[this.env].replace(/\/$/, '');
+		const url = `${baseUrl}/${path}`;
+		const params = filterUndefinedNull({ ...config?.params, _t: Date.now() });
+
+		window.open(`${url}?${objToStr(params)}`).opener = null;
+	}
+
+	/**
+	 * 通过Blob下载文件
+	 * 注意: 针对get请求，假如获取不到文件名，会使用链接下载，此时会请求两次
+	 * @param {Object} config 参数同request
+	 */
+	downLoadByBlob(config) {
+		this.request({
+			...config,
+			responseType: 'blob',
+			fullResponse: true,
+		}).then((res) => {
+			const name = getQueryString('filename', res.headers['content-disposition'], ';');
+			if (!name) {
+				this.downLoadByOpenNewTab({
+					url: config.url,
+				});
+			} else {
+				const url = URL.createObjectURL(res.data);
+				const el = document.createElement('a');
+				el.target = '_blank';
+				el.download = name;
+				el.href = url;
+				el.click();
+				URL.revokeObjectURL(url);
+			}
+		});
 	}
 }
 
