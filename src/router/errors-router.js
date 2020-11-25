@@ -1,14 +1,20 @@
 export default [
 	{
-		path: '/404',
+		path: '/errors/403',
+		name: '403',
+		meta: { hidden: true },
+		component: () => import('@/views/errors/403'),
+	},
+	{
+		path: '/errors/404',
 		name: '404',
 		meta: { hidden: true },
-		component: () => import('@/views/404'),
+		component: () => import('@/views/errors/404'),
 	},
 	{
 		path: '*',
 		name: '*',
 		meta: { hidden: true },
-		redirect: '/404',
+		redirect: '/errors/404',
 	},
 ];
