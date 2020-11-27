@@ -25,7 +25,7 @@ class Request {
 	_errorHandler(error) {
 		const config = error.config;
 		const response = error.response;
-		const message = (response.data || {}).message || statusTextMap.get(status) || error.message || '未知错误';
+		const message = response?.data?.message || statusTextMap.get(status) || error.message || '未知错误';
 
 		if (!config.background) {
 			// @todo 菊花图
@@ -33,7 +33,7 @@ class Request {
 
 		// @todo message
 
-		if (response && response.status) {
+		if (response?.status) {
 			const { status } = response;
 
 			if (status === 401) {
@@ -73,14 +73,14 @@ class Request {
 					// @todo message
 				}
 
-				console.log(data);
+				if (!isObject(data)) {
+					return response;
+				}
 
-				if (isObject(data)) {
-					const { code, IsSuccess, Message = '', value } = data;
-					const customErrorCode = isNaN(Number(code)) ? -1 : Number(code);
-					if (IsSuccess === false) {
-						return Promise.reject(new ApiResponseException(customErrorCode, Message, value));
-					}
+				const { code, success, message = '', value } = data;
+				const customErrorCode = isNaN(Number(code)) ? -1 : Number(code);
+				if (Number(code) === -1 || success === false) {
+					return Promise.reject(new ApiResponseException(customErrorCode, message, value));
 				}
 
 				return response;
