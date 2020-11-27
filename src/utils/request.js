@@ -9,14 +9,13 @@ const { environment, baseUrls } = cfg;
 class Request {
 	constructor(env = 'production', initConfig) {
 		this.env = env;
-		this.isProd = env === 'production';
 
 		this.client = axios.create({
 			timeout: 0, // 暂时永不超时
 			withCredentials: true,
 			paramsSerializer: (params) => objToStr(params),
 			...initConfig,
-			background: !!initConfig?.background,
+			background: !!initConfig.background,
 		});
 
 		this._configRequestInterceptors();
@@ -93,7 +92,7 @@ class Request {
 	}
 
 	request(config) {
-		const url = config.url?.replace(/^\//, '') || '';
+		const url = config.url.replace(/^\//, '') || '';
 		const apiHead = url.split('/')[0] || 'api';
 		let baseUrlConfig = baseUrls[apiHead];
 
@@ -104,9 +103,19 @@ class Request {
 		const baseUrl = baseUrlConfig[this.env].replace(/\/$/, '');
 		config.url = `${baseUrl}/${url}`;
 
-		const { method, headers = {}, params, data } = config;
+		const { method, headers = {}, format = 'json', params, data } = config;
 
 		delete config.headers;
+
+		let body = filterUndefinedNull(data);
+		// FormData在这儿处理
+		if (format.toLocaleLowerCase() === 'formdata') {
+			const fd = new FormData();
+			Object.keys(body).forEach((key) => {
+				fd.append(key, body[key]);
+			});
+			body = fd;
+		}
 
 		const relConfig = {
 			withCredentials: true,
@@ -118,7 +127,7 @@ class Request {
 					_t: !method || method.toLowerCase() === 'get' ? Date.now() : undefined,
 				}),
 			},
-			data: filterUndefinedNull(data),
+			data: { ...body },
 		};
 
 		return this.client
@@ -142,7 +151,11 @@ class Request {
 	 * @param {Object} config?.params 将会以字符串形式拼接至url
 	 */
 	downLoadByOpenNewTab(config = {}) {
-		const path = config.url?.replace(/^\//, '') || '';
+		if ((config.method || '').toLowerCase() !== 'get') {
+			return;
+		}
+
+		const path = config.url.replace(/^\//, '') || '';
 		const apiHead = path.split('/')[0] || 'api';
 		let baseUrlConfig = baseUrls[apiHead];
 
@@ -152,7 +165,7 @@ class Request {
 
 		const baseUrl = baseUrlConfig[this.env].replace(/\/$/, '');
 		const url = `${baseUrl}/${path}`;
-		const params = filterUndefinedNull({ ...config?.params, _t: Date.now() });
+		const params = filterUndefinedNull({ ...config.params, _t: Date.now() });
 
 		window.open(`${url}?${objToStr(params)}`).opener = null;
 	}
@@ -171,7 +184,9 @@ class Request {
 			const name = getQueryString('filename', res.headers['content-disposition'], ';');
 			if (!name) {
 				this.downLoadByOpenNewTab({
+					method: config.method || 'get',
 					url: config.url,
+					params: config.params || {},
 				});
 			} else {
 				const url = URL.createObjectURL(res.data);
