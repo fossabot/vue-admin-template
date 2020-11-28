@@ -15,7 +15,7 @@ class Request {
 			withCredentials: true,
 			paramsSerializer: (params) => objToStr(params),
 			...initConfig,
-			background: !!initConfig.background,
+			background: !!initConfig?.background,
 		});
 
 		this._configRequestInterceptors();
