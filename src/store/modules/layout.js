@@ -1,14 +1,18 @@
 export default {
 	namespaced: true,
 	state: {
+		theme: 'dark',
 		isShowSetting: true,
 		isFixedHeader: true,
-		isShowTabsView: true,
+		isShowTabsView: false,
 		isLogoShow: true,
 		isMenuInAside: true,
 		isMenuCollapse: false,
 	},
 	mutations: {
+		SET_THEME(state, theme) {
+			state.theme = theme;
+		},
 		SET_HEADER_STATUS(state) {
 			state.isFixedHeader = !state.isFixedHeader;
 		},
@@ -26,6 +30,9 @@ export default {
 		},
 	},
 	actions: {
+		onChangeTheme({ commit }, theme) {
+			commit('SET_THEME', theme);
+		},
 		onChangeHeaderStatus({ commit }) {
 			commit('SET_HEADER_STATUS');
 		},

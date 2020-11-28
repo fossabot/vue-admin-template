@@ -1,6 +1,16 @@
+/*
+ * @Author: your name
+ * @Date: 2020-11-11 10:39:25
+ * @LastEditTime: 2020-11-12 11:40:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /vas-fe/src/store/index.js
+ */
 import Vue from 'vue';
 import Vuex, { createLogger } from 'vuex';
-import config from '@/config';
+import cfg from '@/config';
+
+const { isDevelopment } = cfg;
 
 Vue.use(Vuex);
 
@@ -14,7 +24,7 @@ const modules = webpackContext.keys().reduce((res, path) => {
 }, {});
 
 export default new Vuex.Store({
-	strict: config.isDevelopment,
-	plugins: config.isDevelopment ? [createLogger()] : [],
 	modules,
+	strict: isDevelopment,
+	plugins: isDevelopment ? [createLogger()] : [],
 });

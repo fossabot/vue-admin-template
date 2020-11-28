@@ -2,7 +2,7 @@
 	<router-link class="global-logo" to="/">
 		<img class="logo" src="../../../assets/logo.png" alt="模板" />
 		<transition name="fade">
-			<h1 class="title" v-if="!isMenuInAside || (isMenuInAside && !isMenuCollapse)">工作台</h1>
+			<h1 class="title" v-if="!isMenuInAside || (isMenuInAside && !isMenuCollapse)">值核算系统</h1>
 		</transition>
 	</router-link>
 </template>
@@ -30,18 +30,23 @@ export default {
 	align-items: center;
 	justify-content: center;
 	height: @app-header-height;
-	color: #f6ca9d;
+	color: @light-main-font-color;
 	cursor: pointer;
 
 	.logo {
 		width: 20px;
 		height: 20px;
-		margin-right: 4px;
 	}
 	.title {
 		overflow: hidden;
-		font-size: 18px;
+		font-size: 16px;
+		font-weight: normal;
 		white-space: nowrap;
+	}
+}
+[data-theme='dark'] {
+	.global-logo {
+		color: @dark-main-font-color;
 	}
 }
 .fade-enter-active,

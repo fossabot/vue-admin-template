@@ -2,12 +2,12 @@
 	<el-dropdown>
 		<div class="user-center">
 			<el-avatar :size="30" src="https://avatars3.githubusercontent.com/u/22541178?s=60&v=4" />
-			<span class="name">三余无梦生</span>
+			<span class="name">用户名@todo</span>
 		</div>
 		<el-dropdown-menu slot="dropdown">
-			<el-dropdown-item icon="el-icon-plus">不动城</el-dropdown-item>
-			<el-dropdown-item icon="el-icon-setting">设置</el-dropdown-item>
-			<el-dropdown-item icon="el-icon-circle-check">退出登录</el-dropdown-item>
+			<el-dropdown-item icon="el-icon-plus">个人中心</el-dropdown-item>
+			<el-dropdown-item icon="el-icon-setting">关于系统</el-dropdown-item>
+			<el-dropdown-item icon="el-icon-circle-check">退出系统</el-dropdown-item>
 		</el-dropdown-menu>
 	</el-dropdown>
 </template>
@@ -31,7 +31,13 @@ export default {
 		margin-left: 4px;
 	}
 	&:hover {
-		background: #f7f7f7;
+		background: @light-hover-bg-color;
+	}
+}
+
+[data-theme='dark'] {
+	.user-center:hover {
+		background: @dark-hover-bg-color;
 	}
 }
 </style>

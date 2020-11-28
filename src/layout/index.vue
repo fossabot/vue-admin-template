@@ -1,21 +1,23 @@
 <template>
 	<section class="app-container" :class="containerClassNames">
-		<div class="app-header" :class="headerClassNames">
-			<div class="content">
-				<global-header />
-				<transition name="fade">
-					<tabs-bar v-if="isShowTabsView" />
-				</transition>
-			</div>
-		</div>
-
 		<transition name="slide">
 			<global-aside v-if="isMenuInAside" />
 		</transition>
 
-		<section class="app-battlefield">
-			<container />
-		</section>
+		<div class="app-layout">
+			<div class="app-header" :class="headerClassNames">
+				<div class="content">
+					<global-header />
+					<transition name="fade">
+						<tabs-bar v-if="isShowTabsView" />
+					</transition>
+				</div>
+			</div>
+
+			<section class="app-battlefield">
+				<container />
+			</section>
+		</div>
 
 		<global-setting v-if="isShowSetting" />
 	</section>
@@ -40,6 +42,7 @@ export default {
 	},
 	computed: {
 		...mapState({
+			theme: (state) => state.layout.theme,
 			isFixedHeader: (state) => state.layout.isFixedHeader,
 			isShowTabsView: (state) => state.layout.isShowTabsView,
 			isShowSetting: (state) => state.layout.isShowSetting,
@@ -57,6 +60,16 @@ export default {
 			const hasTabs = this.isShowTabsView ? 'has-tabs' : '';
 			return `${fixed} ${hasTabs}`;
 		},
+	},
+	watch: {
+		theme: {
+			handler(theme) {
+				document.body.setAttribute('data-theme', theme);
+			},
+		},
+	},
+	beforeMount() {
+		document.body.setAttribute('data-theme', this.theme);
 	},
 };
 </script>
@@ -83,9 +96,16 @@ export default {
 			}
 		}
 	}
+
+	.app-layout {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
 	.app-header {
 		&.fixed {
-			height: 60px;
+			height: 50px;
 			transition: height 0.3s linear;
 			&.has-tabs {
 				height: @app-header-height + @app-tabs-bar-height;
@@ -96,18 +116,31 @@ export default {
 				right: 0;
 				z-index: @small-z-index;
 				box-shadow: 0 1px 1px #ebeef5;
-				transition: all 0.3s linear;
+				transition: left 0.3s linear;
+			}
+		}
+	}
+
+	.app-battlefield {
+		flex: 1;
+		min-width: 568px;
+		padding: 10px;
+		overflow-y: auto;
+	}
+}
+
+[data-theme='dark'] {
+	.app-container {
+		.app-header {
+			&.fixed {
+				.content {
+					box-shadow: none;
+				}
 			}
 		}
 	}
 }
 
-.app-battlefield {
-	width: 100%;
-	min-width: 568px;
-	padding: 10px;
-	overflow: hidden;
-}
 .slide-enter-active,
 .slide-leave-active {
 	transition: left 0.3s linear;

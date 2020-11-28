@@ -401,4 +401,57 @@ export default {
 		}
 	}
 }
+
+[data-theme='dark'] {
+	.tabs-bar-container {
+		background: @dark-aside-bg-color;
+		border-bottom: 1px solid @dark-border-color;
+		.tabs-bar {
+			.tabs-item {
+				border-color: @dark-border-color;
+				&:hover {
+					color: @dark-primary-color;
+					border-color: @dark-primary-color;
+				}
+
+				&.is-active {
+					color: @dark-black-font-color;
+					background: @dark-primary-color;
+					border-color: @dark-primary-color;
+
+					&:hover {
+						background-color: @dark-primary-hover-color;
+						border-color: @dark-primary-hover-color;
+					}
+				}
+
+				.el-icon-close {
+					&:hover {
+						color: #fff;
+						background: #c0c4cc;
+					}
+				}
+			}
+		}
+
+		.contextmenu {
+			background-color: @dark-main-bg-color;
+			border: 1px solid @dark-border-color;
+			.item {
+				&:hover {
+					color: @dark-primary-hover-color;
+					background-color: @dark-hover-bg-color;
+				}
+
+				&.disabled {
+					color: @dark-main-font-color;
+					background-color: @dark-disabled-bg-color;
+					&:hover {
+						background-color: @dark-disabled-bg-color;
+					}
+				}
+			}
+		}
+	}
+}
 </style>

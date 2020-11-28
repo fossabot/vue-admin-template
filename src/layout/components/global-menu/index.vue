@@ -4,9 +4,9 @@
 		:mode="mode"
 		:default-active="active"
 		:collapse="isMenuCollapse"
-		:background-color="isMenuInAside ? '#1d1e23' : '#ffffff'"
-		:active-text-color="isMenuInAside ? '#ffd04b' : '#0085fa'"
-		:text-color="isMenuInAside ? 'rgba(255, 255, 255, 0.7)' : '#333'"
+		:background-color="isMenuInAside ? themeConfig.backgroundColor.dark : themeConfig.backgroundColor[theme]"
+		:active-text-color="isMenuInAside ? themeConfig.activeTextColor.dark : themeConfig.activeTextColor[theme]"
+		:text-color="isMenuInAside ? themeConfig.textColor.dark : themeConfig.textColor[theme]"
 		@open="onHandleOpen"
 		@close="onHandleClose"
 		@select="onHandleSelect"
@@ -30,12 +30,27 @@ export default {
 	data() {
 		return {
 			active: '/',
+			themeConfig: {
+				backgroundColor: {
+					dark: '#222',
+					light: '#fff',
+				},
+				activeTextColor: {
+					dark: '#ffd04b',
+					light: '#0085fa',
+				},
+				textColor: {
+					dark: 'hsla(0,0%,100%,.7)',
+					light: '#333',
+				},
+			},
 		};
 	},
 	components: { MenuItem },
 	computed: {
 		...mapState({
 			routes: (state) => state.router.routes,
+			theme: (state) => state.layout.theme,
 			isMenuInAside: (state) => state.layout.isMenuInAside,
 			isMenuCollapse: (state) => state.layout.isMenuCollapse,
 		}),

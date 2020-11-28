@@ -49,6 +49,14 @@ export default {
 		border-right: none;
 	}
 }
+
+[data-theme='dark'] {
+	.global-aside {
+		background: @dark-aside-bg-color;
+		border-right: solid 1px @dark-aside-border-color;
+	}
+}
+
 .fade-enter-active,
 .fade-leave-active {
 	transition: opacity 0.3s linear;

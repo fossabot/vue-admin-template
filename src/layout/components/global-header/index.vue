@@ -54,7 +54,7 @@ export default {
 	border-bottom: 1px solid #ebeef5;
 	.header-aside {
 		float: left;
-		width: @app-aside-width / 1.5;
+		width: 145px;
 	}
 	.header-menu {
 		flex: 1;
@@ -72,6 +72,16 @@ export default {
 
 	&:hover {
 		background: #ebeef5;
+	}
+}
+
+[data-theme='dark'] {
+	.global-header {
+		background: @dark-aside-bg-color;
+		border-bottom: 1px solid @dark-aside-border-color;
+	}
+	.header-left:hover {
+		background: @dark-hover-bg-color;
 	}
 }
 

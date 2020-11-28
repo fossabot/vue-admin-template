@@ -17,7 +17,7 @@ module.exports = {
 	devServer: {
 		proxy,
 		port: 3000,
-		open: false,
+		open: true,
 		overlay: {
 			warnings: true,
 			errors: true,
