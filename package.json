@@ -2,7 +2,7 @@
   "name": "vue-admin-template",
   "version": "0.1.0",
   "private": false,
-  "author": "uninge <uninge@163.com>",
+  "author": "uninge <zentao.zendo@gmail.com>",
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -80,5 +80,20 @@
       "prettier -c --write",
       "prettier --check --end-of-line auto"
     ]
-  }
+  },
+	"tags": [
+		"vue",
+		"admin",
+		"template",
+		"element"
+	],
+	"keywords": [
+		"vue",
+		"admin",
+		"template",
+		"element",
+		"vue-template",
+		"vue-admin-template"
+	],
+	"license": "MIT"
 }
