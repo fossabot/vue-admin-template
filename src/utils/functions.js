@@ -36,9 +36,9 @@ export function objToStr(obj) {
 }
 
 export function filterUndefinedNull(obj) {
-	if (!isObject(obj)) return obj;
-
 	const res = {};
+
+	if (!isObject(obj)) return res;
 
 	Object.keys(obj).forEach((key) => {
 		if (obj[key] === undefined || obj[key] === null) return;

@@ -147,11 +147,12 @@ class Request {
 	/**
 	 * 打开新链接下载文件
 	 * @param {Object} config
-	 * @param {String} config.url 接口url路径 eg. Home/DownloadEgFile
+	 * @param {String} config?.method
+	 * @param {String} config.url 接口url路径
 	 * @param {Object} config?.params 将会以字符串形式拼接至url
 	 */
 	downLoadByOpenNewTab(config = {}) {
-		if ((config.method || '').toLowerCase() !== 'get') {
+		if (config.method && config.method.toLowerCase() !== 'get') {
 			return;
 		}
 
@@ -184,7 +185,7 @@ class Request {
 			const name = getQueryString('filename', res.headers['content-disposition'], ';');
 			if (!name) {
 				this.downLoadByOpenNewTab({
-					method: config.method || 'get',
+					method: config.method,
 					url: config.url,
 					params: config.params || {},
 				});
