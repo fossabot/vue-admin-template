@@ -25,7 +25,9 @@ class Request {
 	_errorHandler(error) {
 		const config = error.config;
 		const response = error.response;
-		const message = response?.data?.message || statusTextMap.get(status) || error.message || '未知错误';
+		const resMsg = response?.data?.message;
+		const customMsg = statusTextMap.get(response?.status);
+		const message = resMsg || customMsg || error.message || '未知错误';
 
 		if (!config.background) {
 			// @todo 菊花图
