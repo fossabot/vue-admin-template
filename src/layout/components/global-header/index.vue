@@ -54,7 +54,8 @@ export default {
 	border-bottom: 1px solid #ebeef5;
 	.header-aside {
 		float: left;
-		width: 145px;
+		min-width: 145px;
+		padding: 0 10px;
 	}
 	.header-menu {
 		flex: 1;
@@ -77,6 +78,7 @@ export default {
 
 [data-theme='dark'] {
 	.global-header {
+		color: @dark-primary-color;
 		background: @dark-aside-bg-color;
 		border-bottom: 1px solid @dark-aside-border-color;
 	}

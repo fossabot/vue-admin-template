@@ -1,7 +1,7 @@
 <template>
 	<div class="global-aside" :class="isMenuCollapse ? 'collapse' : ''">
 		<transition name="fade">
-			<global-logo v-if="isLogoShow" />
+			<global-logo class="aside-header" v-if="isLogoShow" />
 		</transition>
 		<el-scrollbar>
 			<global-menu />
@@ -43,6 +43,10 @@ export default {
 	transition: all 0.3s linear;
 	&.collapse {
 		width: @app-aside-collapse-width;
+	}
+
+	.aside-header {
+		color: @dark-primary-color;
 	}
 
 	/deep/ .el-menu {

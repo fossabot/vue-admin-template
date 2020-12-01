@@ -36,7 +36,7 @@ export default {
 					light: '#fff',
 				},
 				activeTextColor: {
-					dark: '#ffd04b',
+					dark: '#ff9900',
 					light: '#0085fa',
 				},
 				textColor: {
