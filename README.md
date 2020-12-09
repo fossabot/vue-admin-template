@@ -1,4 +1,6 @@
 # vue-admin-template
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Funinge%2Fvue-admin-template.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Funinge%2Fvue-admin-template?ref=badge_shield)
+
 
 ## Project setup
 ```
@@ -32,3 +34,7 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Funinge%2Fvue-admin-template.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Funinge%2Fvue-admin-template?ref=badge_large)
